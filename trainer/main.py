@@ -1,16 +1,27 @@
-# This is a sample Python script.
+import matplotlib.pyplot as plt
+import numpy as np
+import tensorflow as tf
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import keras
+from keras import layers, Sequential
 
+import pathlib
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+8 to toggle the breakpoint.
+data_dir = pathlib.Path("data").with_suffix('')
+image_count = len(list(data_dir.glob('*/*.jpg')))
+print(image_count)
 
+batch_size = 4
+img_height = 1280
+img_width = 720
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+train_ds = keras.utils.image_dataset_from_directory(
+  data_dir,
+  validation_split=0.2,
+  subset="training",
+  seed=123,
+  image_size=(img_height, img_width),
+  batch_size=batch_size)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+class_names = train_ds.class_names
+print(class_names)
