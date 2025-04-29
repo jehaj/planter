@@ -4,10 +4,36 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <title>Planter</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <div class="column">
+        <video autoplay></video>
+        <div class="row">
+          <p>Fandt <span id="found-item">Græs</span></p>
+          <button id="retry-button">⟳</button>
+        </div>
+        <table>
+          <tr>
+            <th>
+              <p><span id="found-item">Græs</span> er sidst vandet</p>
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <b>25. maj</b>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              18. maj
+            </td>
+          </tr>
+        </table>
+        <button>Vand nu 🌧️</button>
+      </div>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

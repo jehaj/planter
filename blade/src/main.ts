@@ -1,24 +1,37 @@
 import './style.css'
 import typescriptLogo from '/typescript.svg'
 import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+const video = document.querySelector("video");
+const constraints = {
+  audio: false,
+  video: true,
+};
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+navigator.mediaDevices
+  .getUserMedia(constraints)
+  .then((stream) => {
+    if (!video) return;
+    const videoTracks = stream.getVideoTracks();
+    const track = videoTracks[0];
+    console.log("Got stream with constraints:", constraints);
+    console.log(`Using video device: ${track.label}`);
+    stream.onremovetrack = () => {
+      console.log("Stream ended");
+    };
+    video.srcObject = stream;
+  })
+  .catch((error) => {
+    if (!video) return;
+    if (error.name === "OverconstrainedError") {
+      console.error(
+        `The resolution ${video.width}x${video.height} px is not supported by your device.`,
+      );
+    } else if (error.name === "NotAllowedError") {
+      console.error(
+        "You need to grant this page permission to access your camera and microphone.",
+      );
+    } else {
+      console.error(`getUserMedia error: ${error.name}`, error);
+    }
+  });
