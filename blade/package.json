@@ -10,6 +10,8 @@
   },
   "devDependencies": {
     "typescript": "~5.7.2",
-    "vite": "^6.3.0"
+    "vite": "^6.3.0",
+    "@tensorflow/tfjs": "4.22.0",
+    "@tensorflow/tfjs-converter": "4.22.0"
   }
 }

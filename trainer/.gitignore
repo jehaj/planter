@@ -3,3 +3,4 @@
 /fitted_model/
 /fitted_model_smaller/
 /model_quantized.tflite
+/web_model/
