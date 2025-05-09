@@ -1,10 +1,10 @@
 import "./style.css";
 import typescriptLogo from "/typescript.svg";
 import viteLogo from "/vite.svg";
-import * as tf from "npm:@tensorflow/tfjs";
+import * as tf from "@tensorflow/tfjs";
 import { loadGraphModel } from '@tensorflow/tfjs-converter';
 
-tf.setBackend('weblgl');
+tf.setBackend('webgl');
 console.log(tf);
 
 const MODEL_URL = '/web_model/model.json';
@@ -48,3 +48,4 @@ navigator.mediaDevices
       console.error(`getUserMedia error: ${error.name}`, error);
     }
   });
+
